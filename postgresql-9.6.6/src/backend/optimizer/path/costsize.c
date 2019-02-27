@@ -3808,66 +3808,6 @@ set_baserel_size_estimates(PlannerInfo *root, RelOptInfo *rel)
                                JOIN_INNER,
                                NULL);
 
-    /*
-    // begin modified code
-    int ret;
-    char *name;
-    char *pos;
-    char *p;
-    char key[1000];
-    char cmp[1000];
-    RangeTblEntry *rte;
-    FILE *fp;
-    FILE *fp2;
-    size_t len_t;
-    int num_tables = 0;
-
-    // gather relation name
-    int x = -1;
-    char *tableName;
-    while ((x = bms_next_member(rel->relids, x)) >= 0)
-    {
-        rte = root->simple_rte_array[x];
-        if (rte->rtekind == RTE_RELATION)
-        {
-            tableName = get_rel_name(rte->relid);
-        }
-    }
-
-    // build the key with the relation names
-    strcpy(key, "");
-    strcat(strcat(key, tableName), ",");
-
-    // probe the text file with your key
-    fp = fopen("/Users/waltercai/Desktop/info.txt","r");
-    fp2 = fopen("/Users/waltercai/Desktop/error.txt","a");
-
-    len_t = strlen(key);
-    fprintf(fp2, "key: %s length: %zu\n", key, len_t);
-
-    while (fgets(cmp, 1000, fp) != NULL){
-        if ((pos=strchr(cmp, '\n')) != NULL){
-            *pos = '\0';
-        }
-        p = strtok(cmp, ":");
-        ret = strcmp(key, p);
-        if(ret == 0){
-            p = strtok(NULL, ":");
-            double customVal = atof(p);
-
-            fprintf(fp2, "Match. Inserted cardinality estimate: %f\n", customVal);
-            fprintf(fp2, "%s\n", "=============================");
-
-            fclose(fp);
-            fclose(fp2);
-            nrows = customVal;
-        }
-    }
-    fprintf(fp2, "%s", "No match\n=============================\n");
-    fclose(fp);
-    fclose(fp2);
-
-    */
     rel->rows = clamp_row_est(nrows);
 
     cost_qual_eval(&rel->baserestrictcost, rel->baserestrictinfo, root);
@@ -4206,8 +4146,8 @@ calc_joinrel_size_estimate(PlannerInfo *root,
     }
 
     /* probe the text file with your key */
-	fp = fopen("/Users/waltercai//Documents/postgresql-9.6.6/info.txt","r+");
-	fp2 = fopen("/Users/waltercai//Documents/postgresql-9.6.6/error.txt","a+");
+	fp = fopen("/Users/waltercai/Documents/postgresql-9.6.6/info.txt","r+");
+	fp2 = fopen("/Users/waltercai/Documents/postgresql-9.6.6/error.txt","a+");
 
 	len_t = strlen(key);
 
