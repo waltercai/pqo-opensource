@@ -1,0 +1,2 @@
+src/backend/port/darwin/system.o
+src/backend/port/atomics.o src/backend/port/dynloader.o src/backend/port/pg_sema.o src/backend/port/pg_shmem.o
