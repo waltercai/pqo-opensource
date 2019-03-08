@@ -13,16 +13,17 @@ Following initial setup, one may simply run the java module which will execute e
 ### Postgres Installation
 The instance may be installed in the same manner as with a normal postgres instance. We suggest finding a more comprehensive guide to building postgres from source that is specific to the reader's OS. We found the following guides helpful:
 
-- [linux](https://www.postgresql.org/docs/9.6/install-short.html)
+- [Linux](https://www.postgresql.org/docs/9.6/install-short.html)
 - [OSX](https://labs.wordtothewise.com/postgresql-osx/)
 - [Windows](https://www.postgresql.org/docs/9.6/install-windows.html)
 
 ### Data Upload
-We can clone our imdb database instance by first downloading the compressed clone and unpacking. The copressed data can be downloaded at: XXXXXXXXXX
+One may clone our imdb database instance by first downloading the compressed database and unpacking. The copressed data is available on s3. Readers are also welcome to use newer/older versions of the imdb dataset.
 ~~~~
-wget XXXXXXXXXXX
+wget https://s3-us-west-2.amazonaws.com/uwdbimdbsimple/imdb.dump.gz
 /usr/local/pgsql/bin/createdb imdb
-gunzip -c imdb_dump.txt.gz | psql imdb
+gunzip -c imdb.dump.gz | psql imdb
 ~~~~
 
 ## Bound Generation Module
+The purpose of this module is primarly to populate the `info.txt`. The Driver class
