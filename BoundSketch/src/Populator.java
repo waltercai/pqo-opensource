@@ -139,7 +139,7 @@ class Populator implements Runnable{
                         "postgres",
                         "buds");
                 Statement st;
-                ResultSet rs;
+                java.sql.ResultSet rs;
 
                 int ha, hb;
 
@@ -169,7 +169,7 @@ class Populator implements Runnable{
                         "postgres",
                         "buds");
                 Statement st;
-                ResultSet rs;
+                java.sql.ResultSet rs;
 
                 int ha, hb;
 

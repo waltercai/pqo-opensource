@@ -18,7 +18,7 @@ The instance may be installed in the same manner as with a normal postgres insta
 - [Windows](https://www.postgresql.org/docs/9.6/install-windows.html)
 
 ### Data Upload
-One may clone our imdb database instance by first downloading the compressed database and unpacking. The copressed data is available on s3. Readers are also welcome to use newer/older versions of the imdb dataset.
+One may clone our imdb database instance by first downloading the compressed database and unpacking. The copressed data is available on [s3](https://s3-us-west-2.amazonaws.com/uwdbimdbsimple/imdb.dump.gz). Readers are also welcome to use newer/older versions of the imdb dataset.
 ~~~~
 wget https://s3-us-west-2.amazonaws.com/uwdbimdbsimple/imdb.dump.gz
 /usr/local/pgsql/bin/createdb imdb
@@ -26,4 +26,16 @@ gunzip -c imdb.dump.gz | psql imdb
 ~~~~
 
 ## Bound Generation Module
-The purpose of this module is primarly to populate the `info.txt`. The Driver class
+The purpose of this module is primarly to populate the `info.txt` file. The Driver class also is set up to execute and run the join order benchmark. Results for default postgres execution are written to `/results/[DBName]/plan_execution_time_[budget].txt`. For example, the result of running the join order benchmark with a hash budget of 4096 would be written to `/results/imdb/plan_execution_time_4096.txt`. We also include the sketch processing time which includes the additional preprocessing time incurred by our method in `/results/[DBName]/sketch_preprocessing_[budget].txt`. We also include the postgres [EXPLAIN ANALYZE](https://www.postgresql.org/docs/9.6/sql-explain.html) output for each query in `raw/[DBName]/bound_[budget]].txt`. These include a detailed writeup of the physical join plan and the estimated versus observed intermediate join cardinalities.
+
+Similarly, the if one wishes to compare to default postgres execution, one will find these respective results in `results/[DBName]/default.txt` and `raw/[DBName]/default.txt`.
+
+One may compile the java library using the following command:
+~~~~
+javac -cp .:../combinatoricslib3-3.2.0.jar:../jsqlparser-1.2-SNAPSHOT.jar:../postgresql-42.2.0.jar  *.java
+~~~~
+
+One may execute the tests using the following command:
+~~~~
+java -cp .:../combinatoricslib3-3.2.0.jar:../jsqlparser-1.2-SNAPSHOT.jar:../postgresql-42.2.0.jar Driver
+~~~~

@@ -650,7 +650,6 @@ public class QueryGraph {
                     Attribute[] joinAttrsSpecific = new Attribute[numPartitioned];
                     int ii = 0;
                     for(Attribute aa: r.joinAttributes){
-//                        if(hashSizesMap.get(aa) > 1 || this.buckets == 1){
                         if(hashSizesMap.get(aa) > 1){
                             joinCols[ii] = aa.cols.get(aa.covers.indexOf(r));
                             joinAttrsSpecific[ii] = aa;
@@ -1014,20 +1013,7 @@ public class QueryGraph {
             qg.process(bib, sketchMap, filterCountMap, filterIDsMap, executor);
 
             querySubgraphs.add(qg);
-
-//            /////////////////////////////////////
-//            if(qg.key.equals("aka_name,cast_info,company_name,movie_companies,movie_keyword,person_info,:")) {
-//                System.out.println(qg.key);
-//                qg.describe();
-//                qg.describeBoundFormulae();
-//            }
         }
-
-//        ////////////////////////////
-//        this.process(bib, sketchMap, filterCountMap, filterIDsMap, executor);
-//        System.out.println(this.key);
-//        this.describe();
-//        this.describeBoundFormulae();
 
         try {
             executor.shutdown();
@@ -1037,9 +1023,6 @@ public class QueryGraph {
             e.printStackTrace();
             System.exit(-1);
         }
-
-//        ////////////////////////////
-//        System.out.println(this.getBound());
 
         int[] uniqueSubgraphsCount = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -1157,11 +1140,6 @@ public class QueryGraph {
                     bounds[i] = Long.MAX_VALUE;
                 }
             }
-
-//            //////////////////////////////////
-//            if(this.key.equals("aka_name,cast_info,company_name,movie_companies,movie_keyword,person_info,:")){
-//                System.out.println("Generated Bounds: " + Arrays.toString(bounds));
-//            }
 
             return this.min(bounds);
         }
