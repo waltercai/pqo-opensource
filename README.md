@@ -11,6 +11,18 @@ Following initial setup, one may simply run the java module which will execute e
 ## Modified Postgres Instance
 
 ### Postgres Installation
-The instance may be installed in the same manner as with a normal postgres instance
+The instance may be installed in the same manner as with a normal postgres instance. We suggest finding a more comprehensive guide to building postgres from source that is specific to the reader's OS. We found the following guides helpful:
+
+- [linux](https://www.postgresql.org/docs/9.6/install-short.html)
+- [OSX](https://labs.wordtothewise.com/postgresql-osx/)
+- [Windows](https://www.postgresql.org/docs/9.6/install-windows.html)
+
+### Data Upload
+We can clone our imdb database instance by first downloading the compressed clone and unpacking. The copressed data can be downloaded at: XXXXXXXXXX
+~~~~
+wget XXXXXXXXXXX
+/usr/local/pgsql/bin/createdb imdb
+gunzip -c imdb_dump.txt.gz | psql imdb
+~~~~
 
 ## Bound Generation Module

@@ -4079,7 +4079,7 @@ calc_joinrel_size_estimate(PlannerInfo *root,
 			break;
 	}
 
-	// begin modified code
+	// BEGIN MODIFIED CODE
 	int ret;
 	char *pos;
 	char *p;
@@ -4146,8 +4146,8 @@ calc_joinrel_size_estimate(PlannerInfo *root,
     }
 
     /* probe the text file with your key */
-	fp = fopen("/Users/waltercai/Documents/postgresql-9.6.6/info.txt","r+");
-	fp2 = fopen("/Users/waltercai/Documents/postgresql-9.6.6/error.txt","a+");
+	fp = fopen("/info.txt","r+");
+	fp2 = fopen("/error.txt","a+");
 
 	len_t = strlen(key);
 
