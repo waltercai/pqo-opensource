@@ -18,27 +18,38 @@ It is also possible to simply run the queries using postgres' default cardinalit
 ## Modified Postgres Instance
 
 ### Postgres Installation
-The instance may be installed in the same manner as with a normal postgres instance.
+First, navigate to the directory postgres directory:
+~~~~
+cd postgresql-9.6.6/
+~~~~
+
+The modified postgres source code may be installed in the same manner as with a normal postgres instance.
 We suggest finding a more comprehensive guide to building postgres from source that is specific to the reader's OS.
 We found the following guides helpful:
-
 - [Linux](https://www.postgresql.org/docs/9.6/install-short.html)
 - [OSX](https://labs.wordtothewise.com/postgresql-osx/)
 - [Windows](https://www.postgresql.org/docs/9.6/install-windows.html)
+Return to the home directory
+~~~~
+cd ..
+~~~~
 
 ### Data Upload
 One may clone our imdb database instance by first downloading the compressed database and unpacking.
 The copressed data is available on [s3](https://s3-us-west-2.amazonaws.com/uwdbimdbsimple/imdb.dump.gz).
 Readers are also welcome to use newer/older versions of the imdb dataset.
+Bash script `populate_job.sh` will populate the imdb database or the reader may execute the commands separately.
 ~~~~
 wget https://s3-us-west-2.amazonaws.com/uwdbimdbsimple/imdb.dump.gz
 /usr/local/pgsql/bin/createdb imdb
 gunzip -c imdb.dump.gz | psql imdb
 ~~~~
 
+If using the provided imdb database snapashot, the reader should expect the database to take up 32Gb and take approximately 1 hour to populate.
+
 ## Bound Generation Module
 The purpose of this module is primarly to populate the `info.txt` file.
-The Driver class also is set up to execute and run the join order benchmark.
+The Driver class is also set up to execute and run the join order benchmark.
 Results for default postgres execution are written to `/results/[DBName]/plan_execution_time_[budget].txt`.
 For example, the result of running the join order benchmark with a hash budget of 4096 would be written to `/results/imdb/plan_execution_time_4096.txt`.
 We also include the sketch processing time which includes the additional preprocessing time incurred by our method in `/results/[DBName]/sketch_preprocessing_[budget].txt`.
@@ -49,12 +60,12 @@ Similarly, the if one wishes to compare to default postgres execution, one will 
 Please note that one will likely have to create the `result/` and `raw/` directories ahead of time to avoid errors.
 This also goes for the `results/[DBName]/` and `raw/[DBName]/` subdirectories.
 
-One may compile the java library using the following command:
+One may compile the java library using the following command (from the top level directory of the repo):
 ~~~~
-javac -cp .:../combinatoricslib3-3.2.0.jar:../jsqlparser-1.2-SNAPSHOT.jar:../postgresql-42.2.0.jar  *.java
+javac -cp BoundSketch/src/.:BoundSketch/combinatoricslib3-3.2.0.jar:BoundSketch/jsqlparser-1.2-SNAPSHOT.jar:BoundSketch/postgresql-42.2.0.jar  BoundSketch/src/*.java
 ~~~~
 
 One may execute the tests using the following command:
 ~~~~
-java -cp .:../combinatoricslib3-3.2.0.jar:../jsqlparser-1.2-SNAPSHOT.jar:../postgresql-42.2.0.jar Driver
+java -cp BoundSketch/src/.:BoundSketch/combinatoricslib3-3.2.0.jar:BoundSketch/jsqlparser-1.2-SNAPSHOT.jar:BoundSketch/postgresql-42.2.0.jar Driver
 ~~~~
