@@ -29,7 +29,7 @@ We found the following guides helpful:
 - [Linux](https://www.postgresql.org/docs/9.6/install-short.html)
 - [OSX](https://labs.wordtothewise.com/postgresql-osx/)
 - [Windows](https://www.postgresql.org/docs/9.6/install-windows.html)
-Return to the home directory
+Return to the home directory.
 ~~~~
 cd ..
 ~~~~
