@@ -12,4 +12,5 @@ do
     sed -i '' "s|log.txt|$pwd\/output\/log.txt|g" $path
     sed -i '' "s|output\/raw|$pwd\/output\/raw|g" $path
     sed -i '' "s|output\/results|$pwd\/output\/results|g" $path
+    sed -i '' "s|join-order-benchmark\/|$pwd\/join-order-benchmark\/|g" $path
 done
