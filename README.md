@@ -33,6 +33,12 @@ Return to the home directory.
 ~~~~
 cd ..
 ~~~~
+Finally, we will also need to give ownership of the `info.txt` and `log.txt` files to the postgres default user.
+Execute the following command:
+~~~~
+sudo chown -R postgres output
+suod chmod -R 777 output
+~~~~
 
 ### Data Upload
 One may clone our imdb database instance by first downloading the compressed database and unpacking.
