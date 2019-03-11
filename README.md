@@ -5,8 +5,8 @@ There are two primary modules in this repository.
 
 1. The first is the source code for a modified postgres instance.
 The only real modification is in the `postgresql-9.6.6/src/backend/optimizer/path/costsize.c` file.
-Specifically, the 'calc_joinrel_size_estimate' method.
-Instead of returning the naive default postgres query optimizer cardinality estimates, we parse a `info.txt` file for join cardinality bounds which we use in place of the estimates.
+Specifically, in the `calc_joinrel_size_estimate` method.
+Instead of returning the naive default postgres query optimizer cardinality estimates, we parse the `info.txt` file for join cardinality bounds which we use in place of the estimates.
 If a bound is found for a subquery, then the bound is returned.
 A bound will be returned for all sought after subqueries.
 2. The second is a java module that decomposes queries and creates bounds for all necessary subqueries.
@@ -19,7 +19,7 @@ It is also possible to simply run the queries using postgres' default cardinalit
 
 ## Establishing Output Directories
 We first wish to establish the output directories and sketch serialization directory paths.
-In order to set up the paths across all necessary source files, we provide an shell script:
+In order to set up the paths across all necessary source files, we provide a shell script:
 ~~~~
 ./set_output_dir.sh
 ~~~~
@@ -27,7 +27,7 @@ In order to set up the paths across all necessary source files, we provide an sh
 ## Modified Postgres Instance
 
 ### Postgres Installation
-First, navigate to the directory postgres directory:
+First, navigate to the postgres directory:
 ~~~~
 cd postgresql-9.6.6/
 ~~~~
@@ -38,6 +38,7 @@ We found the following guides helpful:
 - [Linux](https://www.postgresql.org/docs/9.6/install-short.html)
 - [OSX](https://labs.wordtothewise.com/postgresql-osx/)
 - [Windows](https://www.postgresql.org/docs/9.6/install-windows.html) [Note: the remainder of this guide will assume access to a unix command line]
+
 Return to the home directory.
 ~~~~
 cd ..
@@ -60,23 +61,24 @@ wget https://s3-us-west-2.amazonaws.com/uwdbimdbsimple/imdb.dump.gz
 gunzip -c imdb.dump.gz | psql imdb
 ~~~~
 
-If using the provided imdb database snapashot, the reader should expect the database to take up 32Gb and take approximately 1 hour to populate.
+If using the provided imdb database snapashot, the reader should expect the database to take up 32GB of storage.
+Data ingestion and setting up indexes should take approximately an hour. 
 Please note that there are several static sketches saved in `BoundSketch/imdb_sketches/`.
-These sketches comprise those sketches that would populated and saved offline and not populated at runtime under the assumptions of the paper.
+These sketches comprise those sketches that would be populated and saved offline (as versus calculated at runtime) under the assumptions of the paper.
 If the reader uses a snapshot of the imdb dataset that differs from the the provided snapshot, they should be sure to remove all files in the `BoundSketch/imdb_sketches/` directory to ensure correct statistics.
-The files can then be easily repopulated using the `getIMDBSketchPreprocessingTime()` method in `BoundSketch/src/Driver.java`.
-This should be excuted before actual runtime experiments.
+If recalculating statistics on a fresh/altered instance, the `getIMDBSketchPreprocessingTime()` method in `BoundSketch/src/Driver.java` will generate and serialize the static sketches.
+In this scenario, this should be excuted before actual runtime experiments.
 
 ## Bound Generation Module
 The purpose of this module is primarly to populate the `info.txt` file.
 The Driver class is also set up to execute and run the join order benchmark.
 Results for default postgres execution are written to `output/results/[DBName]/plan_execution_time_[budget].txt`.
 For example, the result of running the join order benchmark with a hash budget of 4096 would be written to `output/results/imdb/plan_execution_time_4096.txt`.
-We also include the sketch processing time which includes the additional preprocessing time incurred by our method in `output/results/[DBName]/sketch_preprocessing_[budget].txt`.
-We also include the postgres [EXPLAIN ANALYZE](https://www.postgresql.org/docs/9.6/sql-explain.html) output for each query in `output/raw/[DBName]/bound_[budget].txt`.
+We also include the sketch processing time which includes the additional runtime preprocessing penalty incurred by our method in `output/results/[DBName]/sketch_preprocessing_[budget].txt`.
+We provide the postgres [EXPLAIN ANALYZE](https://www.postgresql.org/docs/9.6/sql-explain.html) output for each query in `output/raw/[DBName]/bound_[budget].txt`.
 These include a detailed writeup of the physical join plan and the estimated versus observed intermediate join cardinalities.
 
-Similarly, if one wishes to compare to default postgres execution, one will find these respective results in output`results/[DBName]/default.txt` and `output/raw/[DBName]/default.txt`.
+Similarly, if one wishes to compare to default postgres execution, one will find these results, and physical plans in output`output/results/[DBName]/default.txt`, and `output/raw/[DBName]/default.txt`, respectively.
 
 One may compile the java library using the following command (from the top level directory of the repo):
 ~~~~
@@ -87,16 +89,3 @@ One may execute the tests using the following command:
 ~~~~
 java -cp BoundSketch/src/.:BoundSketch/combinatoricslib3-3.2.0.jar:BoundSketch/jsqlparser-1.2-SNAPSHOT.jar:BoundSketch/postgresql-42.2.0.jar Driver
 ~~~~
-
-Runtimes will be written to the `output/results` directory.
-Descriptions of the physical join plans are written to `output/raw` directory.
-
-
-
-
-
-
-
-
-
-
