@@ -4,11 +4,13 @@
 There are two primary modules in this repository.
 
 1. The first is the source code for a modified postgres instance.
-The only real modification is in the `postgresql-9.6.6/src/backend/optimizer/path/costsize.c` method.
+The only real modification is in the `postgresql-9.6.6/src/backend/optimizer/path/costsize.c` file.
+Specifically, the 'calc_joinrel_size_estimate' method.
 Instead of returning the naive default postgres query optimizer cardinality estimates, we parse a `info.txt` file for join cardinality bounds which we use in place of the estimates.
 If a bound is found for a subquery, then the bound is returned.
-Ideally, a bound is returned for all sought after subqueries.
-2. The second is a java module that can decomposes queries and creates bounds for all necessary subqueries and populates the `info.txt` file which will then be able to be ingested by a modified postgres instance.
+A bound will be returned for all sought after subqueries.
+2. The second is a java module that decomposes queries and creates bounds for all necessary subqueries.
+The module then populates the `info.txt` file which will then be able to be ingested by above modified postgres instance.
 
 Following initial setup, one may simply run the java module which will execute each query in the desired workload.
 For each query, we will populate `info.txt` with the necessary bounds.
@@ -28,7 +30,7 @@ We suggest finding a more comprehensive guide to building postgres from source t
 We found the following guides helpful:
 - [Linux](https://www.postgresql.org/docs/9.6/install-short.html)
 - [OSX](https://labs.wordtothewise.com/postgresql-osx/)
-- [Windows](https://www.postgresql.org/docs/9.6/install-windows.html)
+- [Windows](https://www.postgresql.org/docs/9.6/install-windows.html) [Note: the remainder of this guide will assume access to a unix command line]
 Return to the home directory.
 ~~~~
 cd ..
@@ -63,7 +65,7 @@ We also include the postgres [EXPLAIN ANALYZE](https://www.postgresql.org/docs/9
 These include a detailed writeup of the physical join plan and the estimated versus observed intermediate join cardinalities.
 
 Similarly, the if one wishes to compare to default postgres execution, one will find these respective results in `results/[DBName]/default.txt` and `raw/[DBName]/default.txt`.
-Please note that one will likely have to create the `result/` and `raw/` directories ahead of time to avoid errors.
+Please note that one will likely have to create the `output/result/` and `output/raw/` directories ahead of time to avoid errors.
 This also goes for the `results/[DBName]/` and `raw/[DBName]/` subdirectories.
 
 One may compile the java library using the following command (from the top level directory of the repo):
@@ -75,3 +77,5 @@ One may execute the tests using the following command:
 ~~~~
 java -cp BoundSketch/src/.:BoundSketch/combinatoricslib3-3.2.0.jar:BoundSketch/jsqlparser-1.2-SNAPSHOT.jar:BoundSketch/postgresql-42.2.0.jar Driver
 ~~~~
+
+Output will be written to the `output/results` directory
