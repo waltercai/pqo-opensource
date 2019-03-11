@@ -37,7 +37,7 @@ Finally, we will also need to give ownership of the `info.txt` and `log.txt` fil
 Execute the following command:
 ~~~~
 sudo chown -R postgres output
-suod chmod -R 777 output
+sudo chmod -R 777 output
 ~~~~
 
 ### Data Upload
