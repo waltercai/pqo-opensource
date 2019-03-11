@@ -61,19 +61,22 @@ gunzip -c imdb.dump.gz | psql imdb
 ~~~~
 
 If using the provided imdb database snapashot, the reader should expect the database to take up 32Gb and take approximately 1 hour to populate.
+Please note that there are several static sketches saved in `BoundSketch/imdb_sketches/`.
+These sketches comprise those sketches that would populated and saved offline and not populated at runtime under the assumptions of the paper.
+If the reader uses a snapshot of the imdb dataset that differs from the the provided snapshot, they should be sure to remove all files in the `BoundSketch/imdb_sketches/` directory to ensure correct statistics.
+The files can then be easily repopulated using the `getIMDBSketchPreprocessingTime()` method in `BoundSketch/src/Driver.java`.
+This should be excuted before actual runtime experiments.
 
 ## Bound Generation Module
 The purpose of this module is primarly to populate the `info.txt` file.
 The Driver class is also set up to execute and run the join order benchmark.
-Results for default postgres execution are written to `/results/[DBName]/plan_execution_time_[budget].txt`.
-For example, the result of running the join order benchmark with a hash budget of 4096 would be written to `/results/imdb/plan_execution_time_4096.txt`.
-We also include the sketch processing time which includes the additional preprocessing time incurred by our method in `/results/[DBName]/sketch_preprocessing_[budget].txt`.
-We also include the postgres [EXPLAIN ANALYZE](https://www.postgresql.org/docs/9.6/sql-explain.html) output for each query in `raw/[DBName]/bound_[budget].txt`.
+Results for default postgres execution are written to `output/results/[DBName]/plan_execution_time_[budget].txt`.
+For example, the result of running the join order benchmark with a hash budget of 4096 would be written to `output/results/imdb/plan_execution_time_4096.txt`.
+We also include the sketch processing time which includes the additional preprocessing time incurred by our method in `output/results/[DBName]/sketch_preprocessing_[budget].txt`.
+We also include the postgres [EXPLAIN ANALYZE](https://www.postgresql.org/docs/9.6/sql-explain.html) output for each query in `output/raw/[DBName]/bound_[budget].txt`.
 These include a detailed writeup of the physical join plan and the estimated versus observed intermediate join cardinalities.
 
-Similarly, the if one wishes to compare to default postgres execution, one will find these respective results in `results/[DBName]/default.txt` and `raw/[DBName]/default.txt`.
-Please note that one will likely have to create the `output/result/` and `output/raw/` directories ahead of time to avoid errors.
-This also goes for the `results/[DBName]/` and `raw/[DBName]/` subdirectories.
+Similarly, if one wishes to compare to default postgres execution, one will find these respective results in output`results/[DBName]/default.txt` and `output/raw/[DBName]/default.txt`.
 
 One may compile the java library using the following command (from the top level directory of the repo):
 ~~~~

@@ -143,6 +143,7 @@ public class Driver {
         };
 
 
+        this.getIMDBSketchPreprocessingTime();
         this.getIMDBBoundPerformance();
         this.getIMDBDefaultPerformance();
     }
