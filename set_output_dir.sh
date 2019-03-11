@@ -1,12 +1,10 @@
 #!/bin/bash
 
-output_paths=
-"postgresql-9.6.6/src/backend/optimizer/path/costsize.c 
+output_paths="postgresql-9.6.6/src/backend/optimizer/path/costsize.c 
 BoundSketch/src/Driver.java 
 BoundSketch/src/QueryGraph.java"
 
-sketch_paths=
-"BoundSketch/src/OneDimensionalSketchUnc.java
+sketch_paths="BoundSketch/src/OneDimensionalSketchUnc.java
 BoundSketch/src/OneDimensionalSketchCon.java
 BoundSketch/src/TwoDimensionalSketchUnc.java
 BoundSketch/src/TwoDimensionalSketchCon.java
