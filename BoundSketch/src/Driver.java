@@ -26,7 +26,7 @@ public class Driver {
 //                8,
 //                1
         };
-       this.candidates = new String[]{
+        this.candidates = new String[]{
                "01a.sql",
                "01b.sql",
                "01c.sql",
@@ -140,11 +140,11 @@ public class Driver {
                "33a.sql",
                "33b.sql",
                "33c.sql"
-       };
+        };
 
 
-        this.getIMDBDefaultPerformance();
         this.getIMDBBoundPerformance();
+        this.getIMDBDefaultPerformance();
     }
 
     private void getIMDBBoundPerformance(){
