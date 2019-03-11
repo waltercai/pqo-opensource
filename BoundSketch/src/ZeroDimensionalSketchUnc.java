@@ -93,12 +93,12 @@ public class ZeroDimensionalSketchUnc extends Sketch {
             try {
 //                System.out.println(Arrays.toString(this.attrs));
                 if(this.activeCol == null) {
-                    this.path = String.format("../%s_sketches/0d%s_[%s]_[%d]_[%s].txt",
+                    this.path = String.format("sketch_dir/BoundSketch/%s_sketches/0d%s_[%s]_[%d]_[%s].txt",
                             this.dbName, this.name, null, this.hashSizes[0],
                             this.attrs[0].split("\\.")[1]);
                 }
                 else{
-                    this.path = String.format("../%s_sketches/0d%s_[%s]_[%d]_[%s].txt",
+                    this.path = String.format("sketch_dir/BoundSketch/%s_sketches/0d%s_[%s]_[%d]_[%s].txt",
                             this.dbName, this.name, this.activeCol.split("\\.")[1], this.hashSizes[0],
                             this.attrs[0].split("\\.")[1]);
                 }
@@ -157,12 +157,12 @@ public class ZeroDimensionalSketchUnc extends Sketch {
             if(r.filters.size() == 0) {
                 try {
                     if(this.activeCol == null){
-                        this.path = String.format("../%s_sketches/0d%s_[%s]_[%d]_[%s].txt",
+                        this.path = String.format("sketch_dir/BoundSketch/%s_sketches/0d%s_[%s]_[%d]_[%s].txt",
                                 this.dbName, this.name, null, this.hashSizes[0],
                                 this.attrs[0].split("\\.")[1]);
                     }
                     else{
-                        this.path = String.format("../%s_sketches/0d%s_[%s]_[%d]_[%s].txt",
+                        this.path = String.format("sketch_dir/BoundSketch/%s_sketches/0d%s_[%s]_[%d]_[%s].txt",
                                 this.dbName, this.name, this.activeCol.split("\\.")[1], this.hashSizes[0],
                                 this.attrs[0].split("\\.")[1]);
                     }
@@ -182,12 +182,12 @@ public class ZeroDimensionalSketchUnc extends Sketch {
         else{
             try {
                 if(this.activeCol == null){
-                    this.path = String.format("../%s_sketches/0d%s_[%s]_[%d]_[%s].txt",
+                    this.path = String.format("sketch_dir/BoundSketch/%s_sketches/0d%s_[%s]_[%d]_[%s].txt",
                             this.dbName, this.name, null, this.hashSizes[0],
                             this.attrs[0].split("\\.")[1]);
                 }
                 else{
-                    this.path = String.format("../%s_sketches/0d%s_[%s]_[%d]_[%s].txt",
+                    this.path = String.format("sketch_dir/BoundSketch/%s_sketches/0d%s_[%s]_[%d]_[%s].txt",
                             this.dbName, this.name, this.activeCol.split("\\.")[1], this.hashSizes[0],
                             this.attrs[0].split("\\.")[1]);
                 }
