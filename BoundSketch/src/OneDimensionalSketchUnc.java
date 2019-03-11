@@ -98,12 +98,12 @@ public class OneDimensionalSketchUnc extends Sketch {
             try {
 //                System.out.println(Arrays.toString(this.attrs));
                 if(this.activeCol == null) {
-                    this.path = String.format("%s/1d%s_[%s]_[%d]_[%s].txt",
+                    this.path = String.format("../%s_sketches/1d%s_[%s]_[%d]_[%s].txt",
                             this.dbName, this.name, null, this.hashSizes[0],
                             this.attrs[0].split("\\.")[1]);
                 }
                 else{
-                    this.path = String.format("%s/1d%s_[%s]_[%d]_[%s].txt",
+                    this.path = String.format("../%s_sketches/1d%s_[%s]_[%d]_[%s].txt",
                             this.dbName, this.name, this.activeCol.split("\\.")[1], this.hashSizes[0],
                             this.attrs[0].split("\\.")[1]);
                 }
@@ -165,7 +165,7 @@ public class OneDimensionalSketchUnc extends Sketch {
         if(r != null) {
             if(r.filters.size() == 0) {
                 try {
-                    this.path = String.format("%s/1d%s_[%s]_[%d]_[%s].txt",
+                    this.path = String.format("../%s_sketches/1d%s_[%s]_[%d]_[%s].txt",
                             this.dbName, this.name, null, this.hashSizes[0],
                             this.attrs[0].split("\\.")[1]);
                     System.out.println("serializing:        " + this.path);
@@ -183,7 +183,7 @@ public class OneDimensionalSketchUnc extends Sketch {
         }
         else{
             try {
-                this.path = String.format("%s/1d%s_[%s]_[%d]_[%s].txt",
+                this.path = String.format("../%s_sketches/1d%s_[%s]_[%d]_[%s].txt",
                         this.dbName, this.name, null, this.hashSizes[0],
                         this.attrs[0].split("\\.")[1]);
                 System.out.println("serializing:        " + this.path);
