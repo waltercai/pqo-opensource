@@ -4146,8 +4146,8 @@ calc_joinrel_size_estimate(PlannerInfo *root,
     }
 
     /* probe the text file with your key */
-	fp = fopen("/info.txt","r+");
-	fp2 = fopen("/error.txt","a+");
+	fp = fopen("info.txt","r+");
+	fp2 = fopen("log.txt","a+");
 
 	len_t = strlen(key);
 

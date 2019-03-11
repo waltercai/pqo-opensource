@@ -164,11 +164,11 @@ public class Driver {
                     System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
                     System.out.println("CURRENT QUERY: " + candidate + ". CURRENT HASH SIZE: " + b);
 
-                    PrintWriter errorWriter = new PrintWriter(new FileOutputStream(
-                            new File("/Users/waltercai/Documents/postgresql-9.6.6/error.txt"),
+                    PrintWriter logWriter = new PrintWriter(new FileOutputStream(
+                            new File("/Users/waltercai/Documents/postgresql-9.6.6/log.txt"),
                             true));
-                    errorWriter.println("NEW QUERY: " + candidate +  "|CURRENT HASH SIZE: " + b);
-                    errorWriter.close();
+                    logWriter.println("NEW QUERY: " + candidate +  "|CURRENT HASH SIZE: " + b);
+                    logWriter.close();
 
                     cmd = new String(readAllBytes(get(dir + candidate)));
 
@@ -298,7 +298,7 @@ public class Driver {
 
         try {
             /* clear info.txt */
-            PrintWriter infoWriter = new PrintWriter("/Users/waltercai/Documents/postgresql-9.6.6/info.txt");
+            PrintWriter infoWriter = new PrintWriter("info.txt");
             infoWriter.close();
 
             for (String candidate : this.candidates) {
@@ -408,11 +408,11 @@ public class Driver {
                     System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
                     System.out.println("CURRENT QUERY: " + candidate + ". CURRENT HASH SIZE: " + b);
 
-                    PrintWriter errorWriter = new PrintWriter(new FileOutputStream(
-                            new File("/Users/waltercai/Documents/postgresql-9.6.6/error.txt"),
+                    PrintWriter logWriter = new PrintWriter(new FileOutputStream(
+                            new File("/Users/waltercai/Documents/postgresql-9.6.6/log.txt"),
                             true));
-                    errorWriter.println("NEW QUERY: " + candidate +  "|CURRENT HASH SIZE: " + b);
-                    errorWriter.close();
+                    logWriter.println("NEW QUERY: " + candidate +  "|CURRENT HASH SIZE: " + b);
+                    logWriter.close();
 
                     cmd = new String(readAllBytes(get(dir + candidate)));
 
@@ -535,7 +535,7 @@ public class Driver {
 
         try {
             /* clear info.txt */
-            PrintWriter infoWriter = new PrintWriter("/Users/waltercai/Documents/postgresql-9.6.6/info.txt");
+            PrintWriter infoWriter = new PrintWriter("info.txt");
             infoWriter.close();
 
             for (String candidate : this.candidates) {

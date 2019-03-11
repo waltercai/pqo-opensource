@@ -1046,20 +1046,20 @@ public class QueryGraph {
         System.out.println("core subgraph join attribute count histogram: " + Arrays.toString(uniqueSubgraphsCount));
 
         try {
-            PrintWriter allInfoWriter = new PrintWriter(new FileOutputStream(
-                    new File("/Users/waltercai/Documents/postgresql-9.6.6/all_info.txt"),
-                    true));
-            allInfoWriter.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-            allInfoWriter.println("CURRENT QUERY: " + this.queryID);
+            // PrintWriter allInfoWriter = new PrintWriter(new FileOutputStream(
+            //         new File("all_info.txt"),
+            //         true));
+            // allInfoWriter.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            // allInfoWriter.println("CURRENT QUERY: " + this.queryID);
 
-            PrintWriter infoWriter = new PrintWriter("/Users/waltercai/Documents/postgresql-9.6.6/info.txt");
+            PrintWriter infoWriter = new PrintWriter("info.txt");
             for(int i=0; i<subgraphKeys.size(); i++){
                 infoWriter.println(subgraphKeys.get(i) + subgraphBounds.get(i));
-                allInfoWriter.println(subgraphKeys.get(i) + subgraphBounds.get(i));
+                // allInfoWriter.println(subgraphKeys.get(i) + subgraphBounds.get(i));
             }
 
             infoWriter.close();
-            allInfoWriter.close();
+            // allInfoWriter.close();
         }
         catch(FileNotFoundException e){
             e.printStackTrace();
