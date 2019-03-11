@@ -1,6 +1,6 @@
 # Pessimistic Cardinality Estimation: Tighter Upper Bounds for Intermediate Join Cardinalities
 
-## Experimental Overview
+## Environment Setup Overview
 There are two primary modules in this repository.
 
 1. The first is the source code for a modified postgres instance.
@@ -16,6 +16,13 @@ Following initial setup, one may simply run the java module which will execute e
 For each query, we will populate `info.txt` with the necessary bounds.
 Following this, each query is submitted to postgres.
 It is also possible to simply run the queries using postgres' default cardinality estimates (this is done by simply leaving `info.txt` empty, a method for which is provided).
+
+## Establishing Output Directories
+We first wish to establish the output directories and sketch serialization directory paths.
+In order to set up the paths across all necessary source files, we provide an shell script:
+~~~~
+./set_output_dir.sh
+~~~~
 
 ## Modified Postgres Instance
 
@@ -78,4 +85,15 @@ One may execute the tests using the following command:
 java -cp BoundSketch/src/.:BoundSketch/combinatoricslib3-3.2.0.jar:BoundSketch/jsqlparser-1.2-SNAPSHOT.jar:BoundSketch/postgresql-42.2.0.jar Driver
 ~~~~
 
-Output will be written to the `output/results` directory
+Runtimes will be written to the `output/results` directory.
+Descriptions of the physical join plans are written to `output/raw` directory.
+
+
+
+
+
+
+
+
+
+
