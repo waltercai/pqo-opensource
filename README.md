@@ -25,6 +25,11 @@ In order to set up the paths across all necessary source files, we provide a she
 ~~~~
 ./set_output_dir.sh
 ~~~~
+Finally, we will also need to give ownership of the output directory to postgres default user:
+~~~~
+sudo chown -R _postgres output
+sudo chmod -R 777 output
+~~~~
 
 ## Modified Postgres Instance
 
@@ -44,12 +49,6 @@ We found the following guides helpful:
 Return to the home directory.
 ~~~~
 cd ..
-~~~~
-Finally, we will also need to give ownership of the `info.txt` and `log.txt` files to the postgres default user.
-Execute the following command:
-~~~~
-sudo chown -R postgres output
-sudo chmod -R 777 output
 ~~~~
 
 ### Data Upload
