@@ -1,5 +1,7 @@
 # Pessimistic Cardinality Estimation: Tighter Upper Bounds for Intermediate Join Cardinalities
 
+We demonstrate how to reproduce the Join Order Benchmark experiments for the SIGMOD 2019 paper "Pessimistic Cardinality Estimation: Tighter Upper Bounds for Intermediate Join Cardinalities".
+
 ## Environment Setup Overview
 There are two primary modules in this repository.
 
