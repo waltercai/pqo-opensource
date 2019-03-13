@@ -27,3 +27,7 @@ do
     sed -i '' "s|sketch_dir|$pwd|g" $path
 done
 
+mkdir output/raw
+mkdir output/results
+mkdir output/raw/imdb
+mkdir output/results/imdb

@@ -70,6 +70,10 @@ If the reader uses a snapshot of the imdb dataset that differs from the the prov
 If recalculating statistics on a fresh/altered instance, the `getIMDBSketchPreprocessingTime()` method in `BoundSketch/src/Driver.java` will generate and serialize the static sketches.
 In this scenario, this should be excuted before actual runtime experiments.
 
+Finally, we need to include a hash function library with our database.
+We use [pghashlib](https://github.com/markokr/pghashlib).
+Please install the hash function library on the imdb dataset as described in the linked repo.
+
 ## Bound Generation Module
 The purpose of this module is primarly to populate the `info.txt` file.
 The Driver class is also set up to execute and run the join order benchmark.
