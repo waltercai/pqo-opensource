@@ -52,8 +52,8 @@ class Populator implements Runnable{
             try {
                 Connection conn = DriverManager.getConnection(
                         String.format("jdbc:postgresql://127.0.0.1:5432/%s", this.dbName),
-                        "postgres",
-                        "buds");
+                        "_postgres",
+                        "");
                 Statement st;
                 java.sql.ResultSet rs;
 
@@ -78,8 +78,8 @@ class Populator implements Runnable{
             try {
                 Connection conn = DriverManager.getConnection(
                         String.format("jdbc:postgresql://127.0.0.1:5432/%s", this.dbName),
-                        "postgres",
-                        "buds");
+                        "_postgres",
+                        "");
                 Statement st;
                 java.sql.ResultSet rs;
 
@@ -107,8 +107,8 @@ class Populator implements Runnable{
             try {
                 Connection conn = DriverManager.getConnection(
                         String.format("jdbc:postgresql://127.0.0.1:5432/%s", this.dbName),
-                        "postgres",
-                        "buds");
+                        "_postgres",
+                        "");
                 Statement st;
                 java.sql.ResultSet rs;
 
@@ -136,8 +136,8 @@ class Populator implements Runnable{
             try {
                 Connection conn = DriverManager.getConnection(
                         String.format("jdbc:postgresql://127.0.0.1:5432/%s", this.dbName),
-                        "postgres",
-                        "buds");
+                        "_postgres",
+                        "");
                 Statement st;
                 java.sql.ResultSet rs;
 
@@ -166,8 +166,8 @@ class Populator implements Runnable{
             try {
                 Connection conn = DriverManager.getConnection(
                         String.format("jdbc:postgresql://127.0.0.1:5432/%s", this.dbName),
-                        "postgres",
-                        "buds");
+                        "_postgres",
+                        "");
                 Statement st;
                 java.sql.ResultSet rs;
 
