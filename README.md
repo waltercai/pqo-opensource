@@ -58,12 +58,12 @@ Readers are also welcome to use newer/older versions of the imdb dataset.
 Bash script `populate_job.sh` will populate the imdb database or the reader may execute the commands separately.
 ~~~~
 wget https://s3-us-west-2.amazonaws.com/uwdbimdbsimple/imdb.dump.gz
-/usr/local/pgsql/bin/createdb imdb
+sudo -u _postgres /usr/local/pgsql/bin/createdb imdb
 gunzip -c imdb.dump.gz | psql imdb
 ~~~~
 
 If using the provided imdb database snapashot, the reader should expect the database to take up 32GB of storage.
-Data ingestion and setting up indexes should take approximately an hour. 
+Data ingestion and setting up indexes should take approximately 40 minutes. 
 Please note that there are several static sketches saved in `BoundSketch/imdb_sketches/`.
 These sketches comprise those sketches that would be populated and saved offline (as versus calculated at runtime) under the assumptions of the paper.
 If the reader uses a snapshot of the imdb dataset that differs from the the provided snapshot, they should be sure to remove all files in the `BoundSketch/imdb_sketches/` directory to ensure correct statistics.
