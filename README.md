@@ -2,6 +2,9 @@
 
 We demonstrate how to reproduce the Join Order Benchmark experiments for the SIGMOD 2019 paper "Pessimistic Cardinality Estimation: Tighter Upper Bounds for Intermediate Join Cardinalities".
 
+LAUREL: list which systems and OS versions this has been tested for. What Java version, which postgres version (for the dummies who can't read 9.6.6)...
+LAURE: Do we need to install the 64 bit or 32 bit postgres? Do we need both?
+
 ## Environment Setup Overview
 There are two primary modules in this repository.
 
@@ -18,6 +21,7 @@ Following initial setup, one may simply run the java module which will execute e
 For each query, we will populate `info.txt` with the necessary bounds.
 Following this, each query is submitted to postgres.
 It is also possible to simply run the queries using postgres' default cardinality estimates (this is done by simply leaving `info.txt` empty, a method for which is provided).
+LAUREL: This last phrase about "a method for which is provided" doesn't make sense. You mean you have a method for clearing info.txt or a method for ignoring info.txt?
 
 ## Establishing Output Directories
 We first wish to establish the output directories and sketch serialization directory paths.
@@ -38,13 +42,31 @@ First, navigate to the postgres directory:
 ~~~~
 cd postgresql-9.6.6/
 ~~~~
-
+LAUREL: the readline tar is not available at the link provided on the OSX download page. After googling, it looks like you can use Homebrew or something similar.
 The modified postgres source code may be installed in the same manner as with a normal postgres instance.
 We suggest finding a more comprehensive guide to building postgres from source that is specific to the reader's OS.
 We found the following guides helpful:
 - [Linux](https://www.postgresql.org/docs/9.6/install-short.html)
 - [OSX](https://labs.wordtothewise.com/postgresql-osx/)
 - [Windows](https://www.postgresql.org/docs/9.6/install-windows.html) [Note: the remainder of this guide will assume access to a unix command line]
+
+On Mac, these could work.
+./configure --prefix=/usr/local/pgsql84 --with-openssl --with-libs=/usr/local/lib --with-includes=/usr/local/include
+make -j8
+sudo make install
+
+sudo dscl . -create /Groups/postgres
+sudo dscl . -create /Groups/postgres PrimaryGroupID 1000
+sudo dscl . -create /Users/postgres
+sudo dscl . -create /Users/postgres UserShell /bin/bash
+sudo dscl . -create /Users/postgres RealName "PostgreSQL"
+sudo dscl . -create /Users/postgres UniqueID "1000"
+sudo dscl . -create /Users/postgres PrimaryGroupID 1000
+
+mkdir /usr/local/pgsql84/data
+chown postgres /usr/local/pgsql84/data
+sudo -u postgres /usr/local/pgsql84/bin/initdb -D /usr/local/pgsql84/data
+
 
 Return to the home directory.
 ~~~~
