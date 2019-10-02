@@ -84,7 +84,7 @@ Readers are also welcome to use newer/older versions of the imdb dataset.
 Bash script `populate_job.sh` will populate the imdb database or the reader may execute the commands separately.
 ~~~~
 wget https://s3-us-west-2.amazonaws.com/uwdbimdbsimple/imdb.dump.gz
-sudo -u ljorr1 /usr/local/pgsql/bin/createdb imdb
+sudo -u <username> /usr/local/pgsql/bin/createdb imdb
 gunzip -c imdb.dump.gz | psql imdb
 ~~~~
 
